@@ -1,0 +1,26 @@
+{include file='notice/header' /}
+
+<form enctype="multipart/form-data" role="form" method="post" action="{:url('notice/do_edit')}">
+    <div class="form-group">
+        <label for="title">标题</label>
+        <p>&nbsp;&nbsp;&nbsp;{$title}</p>
+        {//隐藏的输入框, 用于存储需要更改的公告标题}
+        <input type="hidden" name="title" value="{$title}" />
+    </div>
+    <div class="form-group">
+        <label for="content">内容</label><textarea class="form-control" name="content" rows="3" placeholder="请输入内容, 可为空">{$content}</textarea>
+    </div>
+    <div class="form-group" id="file_form">
+        <label for="inputFile">重新上传文件(不选则保留原文件)</label>
+        <input name="input_file[]" type="file" />
+        
+    </div>
+    <button type="button" class="btn btn-sm" id="add_file" onclick="add_file()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加更多</button>
+    <p class="help-block">
+            &nbsp;&nbsp;大于2M的文件不保存
+    </p>
+    <div class="checkbox">
+    </div> <button type="submit" class="btn btn-default">确定修改</button>
+</form>
+
+{include file='notice/footer' /}

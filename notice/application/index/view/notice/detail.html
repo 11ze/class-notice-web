@@ -1,0 +1,41 @@
+{include file='notice/header' /}
+
+<div style="margin: 10px">        
+    <h4>{$msg.title}</h4>
+    &nbsp;{$msg.create_at} 来自 {$msg.job} {$msg.fullname}
+    <hr style="height:1px;border:none;border-top:1px solid #ADADAD;" />
+    {if condition="$msg.content == ''"}
+        {if condition="$msg.extra == 1"}
+            &nbsp;请看下面
+        {else /}
+            &nbsp;别找了, 只有标题
+        {/if}
+    {/if}
+
+    &nbsp;&nbsp;{$msg.content}
+        
+    {//判断用户是否登录}
+    {if condition="$msg.extra == 1"}
+    <hr style="height:1px;border:none;border-top:1px solid #ADADAD;" />
+        {//循环输出, name为绑定的变量名, id为别名, 不能和name冲突}
+        {volist name='extra_file' id='file'}
+        {if condition="$file.file_type == 1"}
+            <div class="row">
+              <div class=" col-md-6">
+                <div class="thumbnail">
+                  <a href="__ROOT__/__UPLOADS__/{$file.file_name}"><img src="__ROOT__/__UPLOADS__/{$file.file_name}" alt="..."></a>
+                  <div class="caption">
+                    点击查看大图
+                  </div>
+                </div>
+              </div>
+            </div>
+        {else /}
+            &nbsp;{$file.file_name}&nbsp;&nbsp;
+            <a href="__ROOT__/__UPLOADS__/{$file.file_name}" download="{$file.file_name}"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> 点击下载</a>
+        {/if}
+        {/volist}
+    {/if}
+    <hr style="height:1px;border:none;border-top:1px solid #ADADAD;" />
+</div>
+{include file='notice/footer' /}

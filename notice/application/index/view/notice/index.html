@@ -1,0 +1,23 @@
+{include file='notice/header' /}
+
+{//公告列表展示}
+<form method="post" action="{:url('notice/operate')}">
+{//循环输出, name为绑定的变量名, id为别名, 不能和name冲突}
+{volist name='list' id='notice_list'}
+<div style="margin: 10px">
+    <button class="btn btn-default btn-link btn-block" style="padding-left: 0px" name="message" value="{$notice_list.title}^&查看" type='submit'>
+    <h4 style="float: left">
+        {$notice_list.title}</h4>
+        <small style="float: right; color:dimgray"><br/>  {$notice_list.job} {$notice_list.fullname}</small>
+    </button>
+    <p style="overflow: hidden;white-space: nowrap;text-overflow: ellipsis">
+        &nbsp;&nbsp;{$notice_list.content}
+    </p>
+    <em>&nbsp;{$notice_list.create_at} </em>
+    <hr style="height:1px;border:none;border-top:1px solid #ADADAD;" />
+</div>
+{/volist}
+<div style="text-align: center">{$list->render()}</div>
+</form>    
+
+{include file='notice/footer' /}

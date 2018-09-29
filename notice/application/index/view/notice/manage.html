@@ -1,0 +1,45 @@
+{include file='notice/header' /}
+
+{//管理公告}
+<form method="post" action="{:url('notice/operate')}">
+<table class="table" style="table-layout:fixed;">
+    <thead>
+        <tr>
+            <th>
+                标题
+            </th>
+            <th>
+                发布时间
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {//循环输出, name为绑定的变量名, id为别名, 不能和name冲突}
+        {volist name='list' id='self_notice'}
+        <tr>
+            <td>
+                {$self_notice.title}
+            </td>
+            <td>
+                {$self_notice.create_at}
+            </td>
+            <td>
+                <button class="btn btn-default btn-link" name="message" value="{$self_notice.title}^&查看" type='submit'><span class="glyphicon glyphicon-check" aria-hidden="true"></span> 查看</button>
+            </td>
+            <td>
+                <button class="btn btn-default btn-link" name="message" value="{$self_notice.title}^&编辑" type='submit'><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 编辑</button>
+            </td>
+            <td>
+                <button class="btn btn-default btn-link" name="message" value="{$self_notice.title}^&删除" type='submit'><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 删除</button>
+            </td>
+        </tr>
+        {/volist}
+    </tbody>
+</table>
+</form>
+<div style="text-align: center">{$list->render()}</div>
+
+{include file='notice/footer' /}

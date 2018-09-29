@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta name="description" content="自己做的第一个web网站, 使用tp5和bootstrap框架, 用于发布 查看和管理班级公告" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="__ROOT__/__IMAGES__/logo.ico">
+    <title>{$title|default='宝贝请注意'}</title>
+    <link rel="stylesheet" href="__ROOT__/__BCSS__/bootstrap.css">
+    
+  </head>
+  {// body添加背景图 background="__ROOT__/__IMAGES__/blue.jpg"}
+  {// div 添加背景图 style="background-image: url('__ROOT__/__IMAGES__/white.png')"}
+  <body background="__ROOT__/__IMAGES__/back.jpg">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div class="page-header">
+                    <h1>
+                        宝贝请注意<small>&nbsp;>>&nbsp;{$page}</small>
+                    </h1>
+                </div>
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                         {//当页面宽度过小时显示一个菜单按钮, 适用于手机}
+                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> 
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            {//设置变量, 通过传active改变标签状态}
+                            <li class="{$act_list|default=''}">
+                                 <a href="{:url('notice/index')}">公告列表</a>
+                            </li>
+                            <li class="{$act_deliver|default=''}">
+                                 <a href="{:url('notice/deliver')}">发布公告</a>
+                            </li>
+                            <li class="{$act_manage|default=''}">
+                                 <a href="{:url('notice/manage')}">管理公告</a>
+                            </li>
+                        
+                        </ul>
+                        {//保留}
+                        <ul class="nav navbar-nav navbar-right">
+                        {//判断用户是否登录}
+                        {if condition="!session('?fullname')"}
+                            <li class="{$act_login|default=''}">
+                                <a href="{:url('user/login')}">登录</a>
+                            </li>
+                            <li class="{$act_register|default=''}">
+                                <a href="{:url('user/register')}">注册</a>
+                            </li>
+                        {else /}
+                            <li>
+                                 
+                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>{:session('fullname')}<strong class="caret"></strong></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                         <a href="{:url('user/change_passwd')}">修改密码</a>
+                                    </li>
+                                    <li>
+                                         <a href="{:url('user/logout')}">退出</a>
+                                    </li>
+                                    
+                                </ul>
+                            </li>
+                        {/if}
+                        </ul>
+                    </div>
+
+                </nav>
+                <div class="row clearfix">
+                    <div class="col-md-9 column">
